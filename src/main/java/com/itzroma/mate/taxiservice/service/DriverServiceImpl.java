@@ -1,6 +1,7 @@
 package com.itzroma.mate.taxiservice.service;
 
 import com.itzroma.mate.taxiservice.dao.DriverDao;
+import com.itzroma.mate.taxiservice.exception.LoginUnavailableException;
 import com.itzroma.mate.taxiservice.lib.Inject;
 import com.itzroma.mate.taxiservice.lib.Service;
 import com.itzroma.mate.taxiservice.model.Driver;
@@ -14,7 +15,10 @@ public class DriverServiceImpl implements DriverService {
     private DriverDao driverDao;
 
     @Override
-    public Driver create(Driver driver) {
+    public Driver create(Driver driver)  {
+        if (driverDao.findByLogin(driver.getLogin()).isPresent()) {
+            throw new LoginUnavailableException("Login is unavailable");
+        }
         return driverDao.create(driver);
     }
 

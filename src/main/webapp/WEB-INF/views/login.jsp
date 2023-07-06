@@ -13,15 +13,15 @@
     Login:
     <span style="color: red">${errorMessage}</span>
 </h1>
-<h1 class="table_dark">
+<h1 class="table_dark" style="font-size: 20px">
     Or
-    <a href="${pageContext.request.contextPath}/drivers/add">create an account</a>
+    <a href="${pageContext.request.contextPath}/drivers/create">create an account</a>
 </h1>
 <table border="1" class="table_dark">
     <tr>
         <th>Login</th>
         <th>Password</th>
-        <th>Login</th>
+        <th>Action</th>
     </tr>
     <tr>
         <td>
@@ -31,7 +31,7 @@
             <input type="password" name="password" form="login" required>
         </td>
         <td>
-            <input type="submit" name="button" form="login">
+            <button type="submit" form="login">LOGIN</button>
         </td>
     </tr>
 </table>

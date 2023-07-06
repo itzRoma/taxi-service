@@ -16,7 +16,7 @@
         <th>Name</th>
         <th>License number</th>
         <th>Login</th>
-        <th>Delete</th>
+        <th>Action</th>
     </tr>
     <c:forEach var="driver" items="${drivers}">
         <tr>
@@ -33,7 +33,12 @@
                 <c:out value="${driver.login}"/>
             </td>
             <td>
-                <a href="${pageContext.request.contextPath}/drivers/delete?id=${driver.id}">DELETE</a>
+                <c:if test="${sessionScope.driverId != driver.id}">
+                    <form action="${pageContext.request.contextPath}/drivers/delete?id=${driver.id}"
+                          method="post" style="margin: 0">
+                        <button type="submit">DELETE</button>
+                    </form>
+                </c:if>
             </td>
         </tr>
     </c:forEach>

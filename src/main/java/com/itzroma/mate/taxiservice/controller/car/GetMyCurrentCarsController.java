@@ -13,9 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(urlPatterns = "/cars/my")
 public class GetMyCurrentCarsController extends HttpServlet {
-    private static final Injector injector = Injector.getInstance("com.itzroma.mate.taxiservice");
+    private static final Injector injector =
+            Injector.getInstance("com.itzroma.mate.taxiservice");
 
-    private final CarService carService = (CarService) injector.getInstance(CarService.class);
+    private final CarService carService =
+            (CarService) injector.getInstance(CarService.class);
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp)

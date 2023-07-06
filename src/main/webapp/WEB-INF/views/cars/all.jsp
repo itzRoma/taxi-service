@@ -17,7 +17,7 @@
         <th>Manufacturer name</th>
         <th>Manufacturer country</th>
         <th>Drivers</th>
-        <th>Delete</th>
+        <th>Action</th>
     </tr>
     <c:forEach var="car" items="${cars}">
         <tr>
@@ -35,11 +35,14 @@
             </td>
             <td>
                 <c:forEach var="driver" items="${car.drivers}">
-                    ${driver.id} ${driver.name} ${driver.licenseNumber} <br>
+                    ${driver.id} ${driver.name} ${driver.licenseNumber}<br/>
                 </c:forEach>
             </td>
             <td>
-                <a href="${pageContext.request.contextPath}/cars/delete?id=${car.id}">DELETE</a>
+                <form action="${pageContext.request.contextPath}/cars/delete?id=${car.id}"
+                      method="post" style="margin: 0">
+                    <button type="submit">DELETE</button>
+                </form>
             </td>
         </tr>
     </c:forEach>

@@ -9,24 +9,52 @@
 </head>
 <body>
 <%@ include file="../../header.jsp"%>
-<form method="post" id="car" action="${pageContext.request.contextPath}/cars/drivers/add"></form>
-<h1 class="table_dark">Add driver to car:</h1>
+<form method="post" id="car" style="display: none"
+      action="${pageContext.request.contextPath}/cars/drivers/add"></form>
+<h1 class="table_dark">
+    Add driver to car:
+    <span style="color: red">${errorMessage}</span>
+</h1>
 <table border="1" class="table_dark">
     <tr>
-        <th>Car ID</th>
-        <th>Driver ID</th>
-        <th>Add</th>
+        <th>Car</th>
+        <th>Driver</th>
+        <th>Action</th>
     </tr>
     <tr>
-        <td>
-            <input type="number" name="car_id" form="car" required>
-        </td>
-        <td>
-            <input type="number" name="driver_id" form="car" required>
-        </td>
-        <td>
-            <input type="submit" name="add" form="car">
-        </td>
+        <c:choose>
+            <c:when test="${cars.isEmpty()}">
+                <td>NO CARS FOUND</td>
+            </c:when>
+            <c:otherwise>
+                <td>
+                    <select name="car_id" form="car">
+                        <c:forEach var="car" items="${cars}">
+                            <option value="${car.id}">${car.model} (${car.manufacturer.name})</option>
+                        </c:forEach>
+                    </select>
+                </td>
+            </c:otherwise>
+        </c:choose>
+        <c:choose>
+            <c:when test="${drivers.isEmpty()}">
+                <td>NO DRIVERS FOUND</td>
+            </c:when>
+            <c:otherwise>
+                <td>
+                    <select id="all_drivers" name="driver_id" form="car">
+                        <c:forEach var="driver" items="${drivers}">
+                            <option value="${driver.id}">${driver.name} (${driver.licenseNumber})</option>
+                        </c:forEach>
+                    </select>
+                </td>
+            </c:otherwise>
+        </c:choose>
+        <c:if test="${!cars.isEmpty() && !drivers.isEmpty()}">
+            <td>
+                <button type="submit" form="car">ADD</button>
+            </td>
+        </c:if>
     </tr>
 </table>
 </body>

@@ -15,7 +15,7 @@
         <th>ID</th>
         <th>Name</th>
         <th>Country</th>
-        <th>Delete</th>
+        <th>Action</th>
     </tr>
     <c:forEach var="manufacturer" items="${manufacturers}">
         <tr>
@@ -29,7 +29,10 @@
                 <c:out value="${manufacturer.country}"/>
             </td>
             <td>
-                <a href="${pageContext.request.contextPath}/manufacturers/delete?id=${manufacturer.id}">DELETE</a>
+                <form action="${pageContext.request.contextPath}/manufacturers/delete?id=${manufacturer.id}"
+                      method="post" style="margin: 0">
+                    <button type="submit">DELETE</button>
+                </form>
             </td>
         </tr>
     </c:forEach>
