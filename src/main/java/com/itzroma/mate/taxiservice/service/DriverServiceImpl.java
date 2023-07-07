@@ -15,7 +15,7 @@ public class DriverServiceImpl implements DriverService {
     private DriverDao driverDao;
 
     @Override
-    public Driver create(Driver driver)  {
+    public Driver create(Driver driver) {
         if (driverDao.findByLogin(driver.getLogin()).isPresent()) {
             throw new LoginUnavailableException("Login is unavailable");
         }
